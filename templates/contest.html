@@ -1,0 +1,62 @@
+{% extends "base.html" %} {% block title %}Voting{% endblock %} {% block content
+    %}
+    <h2>Upvote to Overturn Classifications</h2>
+    <body>
+        <style>
+            .results { 
+                font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+            }
+            h2 {
+                font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+            }
+            body {
+                font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+            }
+        </style>
+        <!--<p>
+            {% with messages = get_flashed_messages() %}
+              {% if messages %}
+                
+                {% for message in messages %}
+                  <div class="results">{{ message }}</div></br>
+                {% endfor %}
+                
+              {% endif %}
+            {% endwith %}
+        </p>-->
+        {% if entries %}
+            {% for entry in entries %}
+              {% if entry.in_review %}
+                <li class="list-group-item">
+                    {{ entry.file }}
+                </br>
+                    {{ entry.result }}
+                </br> Vote Balance: 
+                    {{ entry.upvotes }}
+                    <div>
+                        <img src="{{ url_for('display_image', filename=entry.file) }}">
+                    </div>
+                    <form action="/vote" method="POST">
+                        <div>
+                          <input type="hidden" name="vote" id="vote" value="{{ 1 }}">
+                          <input type="hidden" name="id" id="id" value="{{ entry.id }}">
+                        </div>
+                        <div>
+                          <button>Overturn</button>
+                        </div>
+                    </form>
+                    <form action="/vote" method="POST">
+                        <div>
+                          <input type="hidden" name="vote" id="vote" value="{{ 0 }}">
+                          <input type="hidden" name="id" id="id" value="{{ entry.id }}">
+                        </div>
+                        <div>
+                          <button>Uphold</button>
+                        </div>
+                    </form>
+                </li>
+              {% endif %}
+            {% endfor %}
+        {% endif %}
+    </body>
+    {% endblock %}

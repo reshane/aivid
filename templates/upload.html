@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
+%}
+<h2>Select a file to upload</h2>
+<body>
+	<style>
+		.results { 
+			font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+		}
+		h2 {
+			font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+		}
+		body {
+			font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+		}
+	</style>
+	<p>
+		{% if results %}
+		
+		{% for res in results %}
+			<div class="results">{{ res }}</div></br>
+		{% endfor %}
+		
+		{% endif %}
+	</p>
+	{% if filename %}
+		<div>
+			<img src="{{ url_for('display_image', filename=filename) }}">
+		</br>
+		</div>
+		<!-- <form method="post" action="/contest" enctype="multipart/form-data">
+			<p>
+				<input type="submit" value="Contest">
+			</p>
+		</form> -->
+		{% if results and contestable %}
+		<form action="/contest" method="POST">
+			<div>
+			  <input type="hidden" name="result" id="result" value="{{ results[0] }}">
+			  <input type="hidden" name="filename" id="filename" value="{{ results[2] }}">
+			  <input type="hidden" name="upvotes" id="upvotes" value="{{ 0 }}">
+			</div>
+			<div>
+			  <button>Contest Classification</button>
+			</div>
+		  </form>
+		{% endif %}
+	{% endif %}
+	<form method="post" action="/" enctype="multipart/form-data">
+	    <dl>
+			<p>
+				<input type="file" name="file" autocomplete="off" required>
+			</p>
+	    </dl>
+	    <p>
+			<input type="submit" value="Submit">
+		</p>
+	</form>
+</body>
+{% endblock %}

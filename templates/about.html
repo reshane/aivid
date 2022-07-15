@@ -1,0 +1,43 @@
+{% extends "base.html" %} {% block title %}About{% endblock %} {% block content
+    %}
+    <body>
+        <style>
+            h3 {
+                font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace;
+            }
+            h2 {
+                font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+            }
+            body {
+                font-family: Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace; 
+            }
+            .body-part {
+                padding: 5px
+            }
+        </style>
+        </br>
+        <div class="body-part">
+            <h2>AIVID</h2>
+            This site is dedicated to classifying images as poison ivy or not poison ivy.
+            The purpose is also to empower the users to feed the model.
+            This is done by contesting the model's classifications and voting to either uphold or overturn said classifications.
+        </div>
+        <div class="body-part">
+            <h3>Voting</h3>
+            In the voting tab are a series of classifications that have been contested by users.
+            Voting to uphold the classification will take the classification out of the 'contested' pool.
+            Voting to overturn will ensure that when the model is retrained, the opposite outcome of this classification will be included the training data.
+        </div>
+        <div class="body-part">
+            <h3>The AI</h3>
+            The model was created by training the <a href="https://pytorch.org/hub/pytorch_vision_resnet/">Resnet18</a> pretrained convolutional neural net model from PyTorch on ~14,000 imgaes of poison ivy and other plants similar in appearance(including box elder, virginia creeper, boston ivy, and a few more).
+            The images were collected via <a href="https://identify.plantnet.org/">plantnet.org.</a>
+            The model was trained using the <a href="https://www.fast.ai/">fastai</a> python library
+        </div>
+        <div class="body-part">
+            <h3>Purpose</h3>
+            The purpose is to allow users complete control over the data that the model is trained on, no matter the outcome.
+            Happy classifying xoxo <a href="https://github.com/shanekenny-cmd">shanek</a>
+        </div>
+    </body>
+    {% endblock %}
